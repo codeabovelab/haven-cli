@@ -2,18 +2,19 @@
 """dm
 
 Usage:
-  dm containers --server=<server> --port=<port> --login=<login> --password=<password> [--verbose=<level>]
+  dm containers --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> [--verbose=<level>]
   dm --help | -h
   dm --version | -v
 
 Options:
   -h --help                         Show this screen.
   -v --version                      Show version.
+  -r --verbose=<level>              Log level
   -u --server=<server>              host of DM server
   -p --port=<port>                  port of DM server
   -l --login=<login>                Username of DM
   -p --password=<password>          Password of DM
-  -r --verbose=<level>              Log level
+  -c --cluster=<cluster>            Cluster name
 
 Examples:
   dm hello

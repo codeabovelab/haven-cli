@@ -6,8 +6,6 @@ import logging
 
 
 class Base(object):
-    """A base command."""
-
     def __init__(self, options, *args, **kwargs):
         self.options = options
         self.args = args
@@ -26,12 +24,18 @@ class Base(object):
     def _send(self, path, method='GET', data=None):
         self.last_req_info = {'method': method, 'path': path, 'data': data}
         try:
+            from base64 import b64encode
             self.__open()
-            self.conn.request(method, path)
-        except:
+
+            userAndPass = b64encode(
+                b"" + self.options.get('--login') + ":" + self.options.get('--server') + "").decode("ascii")
+            headers = {'Authorization': 'Basic %s' % userAndPass}
+
+            self.conn.request(method, path, headers=headers)
+        except Exception as ex:
             self.conn.close()
             self.conn = None
-            logging.error("Can not connect to dm %s due to error: %s", self.gather_error_info(), sys.exc_info()[1])
+            logging.error("Can not connect to dm %s due to error: %s", self.options.get('--server'), ex)
             raise
         resp = self.conn.getresponse()
         if resp.status != '200':
