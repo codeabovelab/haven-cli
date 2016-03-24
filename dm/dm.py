@@ -11,6 +11,10 @@ Usage:
   dm restart --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --id=<containerId> [--verbose=<level>]
   dm create --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --tag=<tag> --image=<image> [--verbose=<level>]
   dm scale --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --id=<containerId> [--verbose=<level>]
+
+  dm job_update --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --service=<service> --version=<version> --strategy=<strategy> [--verbose=<level>]
+  dm job_statuses --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> [--verbose=<level>]
+
   dm --help | -h
   dm --version | -v
 
@@ -23,6 +27,19 @@ Options:
   -l --login=<login>                Username of DM
   -p --password=<password>          Password of DM
   -c --cluster=<cluster>            Cluster name
+
+Commands:
+  clusters                          List of clusters
+  cluster                           Cluster info
+  nodes                             List of nodes by cluster
+  containers                        List of containers by cluster
+  start                             Start container
+  stop                              Stop container
+  restart                           Restart container
+  create                            Create container in cluster
+  scale                             Scale container
+  job_update                        Run update job
+  job_statuses                     List of jobs statuses by cluster
 
 Examples:
   dm hello
