@@ -4,6 +4,7 @@
 import http.client
 import logging
 import json
+
 from lib.tabulate import tabulate
 
 
@@ -49,11 +50,11 @@ class Base(object):
             userAndPass = self.options.get('--login') + ':' + self.options.get('--password')
             bAuth = b64encode(str.encode(userAndPass)).decode("ascii")
             headers = {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Basic %s' % bAuth
-                    }
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic %s' % bAuth
+            }
 
-            self.conn.request(method, path, headers=headers)
+            self.conn.request(method, path, data, headers=headers)
         except Exception as ex:
             self.conn.close()
             self.conn = None

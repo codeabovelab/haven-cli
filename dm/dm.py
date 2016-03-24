@@ -9,6 +9,7 @@ Usage:
   dm start --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --id=<containerId> [--verbose=<level>]
   dm stop --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --id=<containerId> [--verbose=<level>]
   dm restart --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --id=<containerId> [--verbose=<level>]
+  dm create --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --tag=<tag> --image=<image> [--verbose=<level>]
   dm scale --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --id=<containerId> [--verbose=<level>]
   dm --help | -h
   dm --version | -v
@@ -25,6 +26,7 @@ Options:
 
 Examples:
   dm hello
+  dm create --cluster=firstCluster --tag=latest --image=com.codeabovelab.dm.balancer-web
 
 Help:
   You can put any configs to dm.conf file
