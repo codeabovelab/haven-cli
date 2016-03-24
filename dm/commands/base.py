@@ -26,11 +26,17 @@ class Base(object):
     def _print(self, keys, result):
         table = []
         table.append(keys)
-        for item in result:
+        if isinstance(result, list):
+            for item in result:
+                innerTable = []
+                table.append(innerTable)
+                for key in keys:
+                    innerTable.append(str(item.get(key)))
+        else:
             innerTable = []
             table.append(innerTable)
             for key in keys:
-                innerTable.append(item.get(key))
+                innerTable.append(str(result.get(key)))
         tabulate(table, headers="firstrow")
         print(tabulate(table))
 

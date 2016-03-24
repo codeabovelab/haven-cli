@@ -1,7 +1,6 @@
-"""The hello command."""
+"""List of clusters."""
 
 
-from lib.tabulate import tabulate
 from .base import Base
 
 
@@ -9,7 +8,8 @@ class Clusters(Base):
 
     def run(self):
         # /clusters/
-        result = self._send("/ui/api/containers/")
-        print(result)
+        result = self._send("/ui/api/clusters/")
+        keys = ['name']
+        self._print(keys, result)
 
 

@@ -3,6 +3,8 @@
 
 Usage:
   dm clusters --server=<server> --port=<port> --login=<login> --password=<password> [--verbose=<level>]
+  dm cluster --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> [--verbose=<level>]
+  dm nodes --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> [--verbose=<level>]
   dm containers --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> [--verbose=<level>]
   dm scale --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --id=<containerId> [--verbose=<level>]
   dm --help | -h
