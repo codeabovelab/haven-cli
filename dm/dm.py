@@ -11,10 +11,10 @@ Usage:
   dm restart --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --id=<containerId> [--verbose=<level>]
   dm create --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --tag=<tag> --image=<image> [--verbose=<level>]
   dm scale --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --id=<containerId> [--verbose=<level>]
-
-  dm job_update --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --service=<service> --version=<version> --strategy=<strategy> [--verbose=<level>]
+  dm job_update --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --image=<image> --to_version=<to_version> --strategy=<strategy> [--verbose=<level>]
   dm job_statuses --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> [--verbose=<level>]
-
+  dm configuration --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --file=<path_to_file> [--verbose=<level>]
+  dm compose --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> --file=<path_to_file> [--verbose=<level>]
   dm --help | -h
   dm --version | -v
 
@@ -39,7 +39,9 @@ Commands:
   create                            Create container in cluster
   scale                             Scale container
   job_update                        Run update job
-  job_statuses                     List of jobs statuses by cluster
+  job_statuses                      List of jobs statuses by cluster
+  configuration                     Store configuration to specified file
+  compose                           Run specified compose file
 
 Examples:
   dm hello
