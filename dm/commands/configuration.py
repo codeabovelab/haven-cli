@@ -13,7 +13,7 @@ class Configuration(Base):
         print(result)
 
         with open(self.options.get('--file'), 'w') as outfile:
-            json.dump(data, outfile)
+            json.dump(result, outfile)
 
 
 
