@@ -2,7 +2,7 @@
 
 
 from .base import Base
-
+import json
 
 class Clusters(Base):
 
@@ -10,6 +10,6 @@ class Clusters(Base):
         # /clusters/
         result = self._send("/ui/api/clusters/")
         keys = ['name']
-        self._print(keys, result)
+        self._print(keys, json.loads(result))
 
 

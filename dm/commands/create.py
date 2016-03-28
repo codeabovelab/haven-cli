@@ -10,3 +10,4 @@ class Create(Base):
         result = self._send(
             "/ui/api/clusters/" + self.options.get('--cluster') + "/containers/create",
             method='POST', data=data)
+        print(result)

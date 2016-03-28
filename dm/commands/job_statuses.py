@@ -8,4 +8,4 @@ class JobStatuses(Base):
         result = self._send("/ui/api/clusters/" + self.options.get('--cluster') + "/api/jobs")
         keys = ['id', 'name', 'parameters', 'status', 'startTime', 'createTime', 'endTime', 'lastUpdated', 'exitCode',
                 'exitDescription', 'running']
-        self._print(keys, result)
+        self._print(keys, json.loads(result))

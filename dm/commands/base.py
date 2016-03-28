@@ -3,7 +3,6 @@
 """The base command."""
 import http.client
 import logging
-import json
 
 from lib.tabulate import tabulate
 
@@ -19,7 +18,7 @@ class Base(object):
         self.options
         raise NotImplementedError('You must implement the run() method yourself!')
 
-    def __open(self):
+    def _open(self):
         if self.conn:
             return
         self.conn = http.client.HTTPConnection(self.options.get('--server'), self.options.get('--port'))
@@ -42,10 +41,9 @@ class Base(object):
         print(tabulate(table))
 
     def _send(self, path, method='GET', data=None):
-        self.last_req_info = {'method': method, 'path': path, 'data': data}
         try:
             from base64 import b64encode
-            self.__open()
+            self._open()
 
             userAndPass = self.options.get('--login') + ':' + self.options.get('--password')
             bAuth = b64encode(str.encode(userAndPass)).decode("ascii")
@@ -64,4 +62,4 @@ class Base(object):
         if resp.status > 300:
             raise Exception("Invalid response: {} {} from {}"
                             .format(resp.status, resp.reason, self.options.get('--server')))
-        return json.loads(resp.read().decode('utf8'))
+        return resp.read().decode('utf8')
