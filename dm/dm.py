@@ -45,7 +45,9 @@ Commands:
 
 Examples:
   dm hello
-  dm create --cluster=firstCluster --tag=latest --image=com.codeabovelab.dm.balancer-web
+  dm job_update --cluster=firstCluster --image=ni2.codeabovelab.com:8080/com.navinfo.platform.opentsp-stub-core:latest --to_version=1.171 --strategy=stopThenStartAll
+  dm create --cluster=firstCluster --tag=latest --image=com.navinfo.platform.opentsp-stub-core
+
 
 Help:
   You can put any configs to dm.conf file
