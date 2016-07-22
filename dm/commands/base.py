@@ -3,6 +3,7 @@
 """The base command."""
 import http.client
 import logging
+import json
 
 from lib.tabulate import tabulate
 
@@ -28,17 +29,28 @@ class Base(object):
         table.append(keys)
         if isinstance(result, list):
             for item in result:
-                innerTable = []
-                table.append(innerTable)
-                for key in keys:
-                    innerTable.append(str(item.get(key)))
+                self.__parse(item, keys, table)
         else:
-            innerTable = []
-            table.append(innerTable)
-            for key in keys:
-                innerTable.append(str(result.get(key)))
+            self.__parse(result, keys, table)
+
         tabulate(table, headers="firstrow")
         print(tabulate(table))
+
+    @staticmethod
+    def __parse(item, keys, table):
+        innertable = []
+        table.append(innertable)
+        for key in keys:
+            if "." in key:
+                subkeys = key.split(".")
+                innerList = str(item.get(subkeys[0]))
+                items = []
+                innderData = json.loads(innerList.replace("'","\"").replace("True","\"True\""))
+                for l in innderData:
+                    items.append(l.get(subkeys[1]))
+                innertable.append(' '.join(items))
+            else:
+                innertable.append(str(item.get(key)))
 
     def _send(self, path, method='GET', data=None):
         try:
