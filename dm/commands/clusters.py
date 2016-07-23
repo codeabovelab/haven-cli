@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""usage: dm clusters --server=<server> --port=<port> --login=<login> --password=<password> [--columns=<column1,column2>] [--verbose=<level>]
+"""usage: dm clusters --server=<server> --port=<port> --login=<login> --password=<password> [--columns=<column1,column2>] [--help] [--verbose=<level>]
 
 Returns list of clusters
 

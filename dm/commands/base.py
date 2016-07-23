@@ -43,11 +43,14 @@ class Base(object):
         for key in keys:
             if "." in key:
                 subkeys = key.split(".")
-                innerList = str(item.get(subkeys[0]))
+                inner_data = item.get(subkeys[0])
                 items = []
-                innderData = json.loads(innerList.replace("'","\"").replace("True","\"True\""))
-                for l in innderData:
-                    items.append(l.get(subkeys[1]))
+                if inner_data:
+                    if isinstance(inner_data, list):
+                        for l in inner_data:
+                            items.append(l.get(subkeys[1]))
+                    else:
+                        items.append(str(inner_data.get(subkeys[1])))
                 innertable.append(' '.join(items))
             else:
                 innertable.append(str(item.get(key)))

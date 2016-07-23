@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""usage: dm cluster --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> [--columns=<column1,column2>] [--verbose=<level>]
+"""usage: dm cluster --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> [--columns=<column1,column2>] [--help] [--verbose=<level>]
 
 Returns cluster information
 
@@ -16,7 +16,7 @@ Options:
   --columns=<column1,column2>       List of columns [default: name,containers,images,ncpu,memory,nodeCount,nodeList.name]
 
 Examples:
-  dm containers --cluster=dev
+  dm cluster --cluster=dev
 
 Help:
   You can put any configs to dm.conf file

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""usage: dm containers --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> [--help] [--verbose=<level>]
+"""usage: dm containers --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> [--columns=<id,name,node,cluster,image,ports,status>] [--help] [--verbose=<level>]
 
 Options:
   -h --help                         Show this screen.
@@ -10,6 +10,7 @@ Options:
   -l --login=<login>                Username of DM
   -p --password=<password>          Password of DM
   -c --cluster=<cluster>            Cluster name
+  --columns=<column1,column2>       List of columns [default: id,name,node,cluster,image,ports,status]
 
 Examples:
   dm containers --cluster=dev
