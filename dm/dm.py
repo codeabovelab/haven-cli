@@ -54,12 +54,12 @@ def main():
 
     init_args_key = []
     for i in args:
-        if "=" in i:
-            init_args_key.append(i.split("=")[0])
+        if '=' in i:
+            init_args_key.append(i.split('=')[0])
 
     for key, value in ini_config.items():
         if key not in init_args_key:
-            args.append(key + "=" + value)
+            args.append(key + '=' + value)
 
     options = docopt(__doc__, version='1.0', options_first=True)
 

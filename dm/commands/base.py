@@ -42,7 +42,7 @@ class Base(object):
         table.append(innertable)
         for key in keys:
             if "." in key:
-                subkeys = key.split(".")
+                subkeys = key.split('.')
                 inner_data = item.get(subkeys[0])
                 items = []
                 if inner_data:

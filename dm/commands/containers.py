@@ -26,11 +26,27 @@ from .base import Base
 
 
 class Containers(Base):
-
     def run(self):
         # /clusters/{cluster}/containers
         result = self._send("/ui/api/clusters/" + self.options.get('--cluster') + "/containers")
 
-        keys = ['id', 'name', 'node', 'cluster', 'image', 'ports', 'status']
-        self._print(keys, json.loads(result))
+        data = json.loads(result);
+        sb = ""
+        for d in data:
+            ports = d.get('ports')
+            for port in ports:
+                sb += str(port.get('PrivatePort'))
+                sb += '/' + port.get('Type')
+                public_port = port.get("PublicPort")
+                sb += ' '
+                if public_port > 0:
+                    sb += "->"
+                    if port.get('IP'):
+                        sb += port.get('IP') + ':'
+                    sb += str(public_port)
 
+            d['ports'] = sb
+
+        columns = self.options.get('--columns')
+        keys = columns.split(',')
+        self._print(keys, data)
