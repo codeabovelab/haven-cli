@@ -41,6 +41,7 @@ class Base(object):
         innertable = []
         table.append(innertable)
         for key in keys:
+            key = key.strip()
             if "." in key:
                 subkeys = key.split('.')
                 inner_data = item.get(subkeys[0])
@@ -53,7 +54,10 @@ class Base(object):
                         items.append(str(inner_data.get(subkeys[1])))
                 innertable.append(' '.join(items))
             else:
-                innertable.append(str(item.get(key)))
+                res = str(item.get(key))
+                # if key == "id":
+                #     res = res[:12]
+                innertable.append(res)
 
     def _send(self, path, method='GET', data=None):
         try:

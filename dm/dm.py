@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Usage:
-  dm [--help] <command> [<args>...]
+  dm [--option] <command> [<args>...]
   dm --help | -h
   dm --version | -v
 
@@ -30,7 +30,8 @@ Commands:
 
 Examples:
   dm cluster --help
-  dm job_update --cluster=firstCluster --image=ni2.codeabovelab.com:8080/com.navinfo.platform.opentsp-stub-core:latest --to_version=1.171 --strategy=stopThenStartAll
+  dm cluster --cluster=dev
+  dm job_update --cluster=firstCluster --image=ni1.codeabovelab.com/cluster-manager:latest --to_version=1.171 --strategy=stopThenStartAll
   dm create --cluster=firstCluster --tag=latest --image=com.navinfo.platform.opentsp-stub-core
 
 

@@ -12,7 +12,7 @@ Options:
   -p --port=<port>                  port of DM server [default: 8761]
   -l --login=<login>                Username of DM
   -p --password=<password>          Password of DM
-  --columns=<column1,column2>       List of columns [default: name]
+  --columns=<column1,column2>       List of columns [default: name,nodes,containers,features]
 
 Examples:
   dm clusters

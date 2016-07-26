@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""usage: dm cluster --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> [--columns=<column1,column2>] [--help] [--verbose=<level>]
+"""usage: dm cluster (info|add|rm) --server=<server> --port=<port> --login=<login> --password=<password> --cluster=<cluster> [--columns=<column1,column2>] [--help] [--verbose=<level>]
 
 Returns cluster information
 
@@ -27,13 +27,30 @@ Help:
 from .base import Base
 import json
 
-class Cluster(Base):
 
+class Cluster(Base):
     def run(self):
         # /clusters/{cluster}/containers
+        info = self.options.get('info')
+        add = self.options.get('add')
+        rm = self.options.get('rm')
+        if info:
+            self.__getInfo()
+        if add:
+            self.__add()
+        if rm:
+            self.__rm()
+
+    def __getInfo(self):
         result = self._send("/ui/api/clusters/" + self.options.get('--cluster') + "/info")
         columns = self.options.get('--columns')
         keys = columns.split(",")
         self._print(keys, json.loads(result))
 
+    def __add(self):
+        # /ui/api/clusters/dev
+        result = self._send("/ui/api/clusters/" + self.options.get('--cluster'), method='PUT')
 
+    def __rm(self):
+        # /ui/api/clusters/dev
+        result = self._send("/ui/api/clusters/" + self.options.get('--cluster'), method='DELETE')
