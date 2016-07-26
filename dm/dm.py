@@ -7,16 +7,17 @@
 Options:
   -h --help                         Show this screen.
   -v --version                      Show version.
-  -r --verbose=<level>              Log level
-  -u --server=<server>              host of DM server
+  -l --log=<level>                  Log level
+  -s --server=<server>              host of DM server
   -p --port=<port>                  port of DM server
-  -l --login=<login>                Username of DM
+  -u --user=<login>                Username of DM
   -p --password=<password>          Password of DM
 
 Commands:
   clusters                          List of clusters
   cluster                           Cluster info
   nodes                             List of nodes by cluster
+  bind                              Node-cluster binding
   containers                        List of containers by cluster
   start                             Start container
   stop                              Stop container

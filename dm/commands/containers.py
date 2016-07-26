@@ -4,10 +4,10 @@
 Options:
   -h --help                         Show this screen.
   -v --version                      Show version.
-  -r --verbose=<level>              Log level
-  -u --server=<server>              host of DM server [default: localhost]
+  -l --log=<level>                  Log level
+  -s --server=<server>              host of DM server [default: localhost]
   -p --port=<port>                  port of DM server [default: 8761]
-  -l --login=<login>                Username of DM
+  -u --user=<login>                 Username of DM
   -p --password=<password>          Password of DM
   -c --cluster=<cluster>            Cluster name
   --columns=<column1,column2>       List of columns [default: id,name,node,cluster,image,ports,status]

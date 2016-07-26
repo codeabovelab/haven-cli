@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""usage: dm nodes [--bind=<nodeId:cluster>] --server=<server> --port=<port> --login=<login> --password=<password> [--columns=<name,host>] [--help] [--verbose=<level>]
+"""usage: dm bind --cluster=<cluster> (--add=<nodeId>|--rm=<nodeId>) --server=<server> --port=<port> --login=<login> --password=<password> [--columns=<name,host>] [--help] [--verbose=<level>]
 
 Returns list of nodes
 
@@ -26,9 +26,19 @@ import json
 from .base import Base
 
 
-class Nodes(Base):
+class Bind(Base):
     def run(self):
-        # /ui/api/nodes/
+
+        # /clusters/{cluster}/containers
+        add = self.options.get('--add')
+        rm = self.options.get('--rm')
+        if add:
+            # post /ui/api/clusters/{cluster}/nodes/{node}
+            self._send("/ui/api/clusters/" + self.options.get('--cluster') + "/nodes/" + self.options.get('--add'), method='POST')
+        if rm:
+            # delete /ui/api/clusters/{cluster}/nodes/{node}
+            self._send("/ui/api/clusters/" + self.options.get('--cluster') + "/nodes/" + self.options.get('--rm'), method='DELETE')
+
         result = self._send("/ui/api/nodes/")
         columns = self.options.get('--columns')
         keys = columns.split(",")
