@@ -19,11 +19,7 @@ Commands:
   nodes                             List of nodes by cluster
   bind                              Node-cluster binding
   containers                        List of containers by cluster
-  start                             Start container
-  stop                              Stop container
-  restart                           Restart container
-  create                            Create container in cluster
-  scale                             Scale container
+  container                         Container's operations
   job_update                        Run update job
   job_statuses                      List of jobs statuses by cluster
   configuration                     Store configuration to specified file
