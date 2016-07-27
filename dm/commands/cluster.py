@@ -39,9 +39,9 @@ class Cluster(Base):
             self.__add()
         if rm:
             self.__rm()
-        self.__getInfo()
+        self.__info()
 
-    def __getInfo(self):
+    def __info(self):
         result = self._send("/ui/api/clusters/" + self.options.get('--cluster') + "/info")
         columns = self.options.get('--columns')
         keys = columns.split(",")
