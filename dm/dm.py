@@ -4,13 +4,13 @@
   dm --help | -h
   dm --version | -v
 
-Options:
+Common options:
   -h --help                         Show this screen.
   -v --version                      Show version.
   -l --log=<level>                  Log level
   -s --server=<server>              host of DM server
   -p --port=<port>                  port of DM server
-  -u --user=<login>                Username of DM
+  -u --user=<login>                 Username of DM
   -p --password=<password>          Password of DM
 
 Commands:

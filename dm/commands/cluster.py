@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""usage: dm cluster [(info|add|rm)] --cluster=<cluster> --server=<server> --port=<port> --login=<login> --password=<password>  [--columns=<column1,column2>] [--help] [--verbose=<level>]
+"""usage: dm cluster [info|add|rm] --cluster=<cluster> --server=<server> --port=<port> --login=<login> --password=<password>  [--columns=<column1,column2>] [--help] [--verbose=<level>]
 
 Returns cluster information
 
