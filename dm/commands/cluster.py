@@ -10,11 +10,15 @@ Options:
   -l --log=<level>                  Log level
   -s --server=<server>              host of DM server [default: localhost]
   -p --port=<port>                  port of DM server [default: 8761]
-  -u --user=<login>                Username of DM
+  -u --user=<login>                 Username of DM
   -p --password=<password>          Password of DM
   -c --cluster=<cluster>            Cluster name
   --columns=<column1,column2>       List of columns [default: name,containers,images,ncpu,memory,nodeCount,nodeList.name]
 
+Commands:
+  info                              Default action: shows container information
+  add                               Add new cluster
+  rm                                Remove cluster
 Examples:
   dm cluster add --cluster=dev
   dm cluster --cluster=dev
