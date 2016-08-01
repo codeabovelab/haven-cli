@@ -3,9 +3,8 @@
 """The base command."""
 import http.client
 import logging
-import json
 
-from lib.tabulate import tabulate
+from ..lib.tabulate import tabulate
 
 
 class Base(object):

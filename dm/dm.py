@@ -41,11 +41,12 @@ Help:
 from inspect import getmembers, isclass
 
 import sys
-from lib.docopt import docopt
-
+import os
+from .lib.docopt import docopt
+from . import commands as COMMANDS
+from . import __version__ as VERSION
 
 def main():
-    import commands
     ini_config = load_ini_config()
 
     args = sys.argv[1:]
@@ -59,14 +60,14 @@ def main():
         if key not in init_args_key:
             args.append(key + '=' + value)
 
-    options = docopt(__doc__, version='1.0', options_first=True)
+    options = docopt(__doc__, version=VERSION, options_first=True)
 
     # Here we'll try to dynamically match the command the user is trying to run
     # with a pre-defined command class we've already created.
 
     c = options['<command>']
-    if hasattr(commands, c):
-        module = getattr(commands, c)
+    if hasattr(COMMANDS, c):
+        module = getattr(COMMANDS, c)
         commands = getmembers(module, isclass)
         command = [command[1] for command in commands if command[0] != 'Base'][0]
         options = docopt(module.__doc__, argv=args)
@@ -81,13 +82,19 @@ def load_ini_config():
     # write `--force` instead of `--force=true` below.
 
     config = configparser.ConfigParser(allow_no_value=True) # Pretend that we load the following INI file:
-    config.read('dm.conf')
+
+    config_files = ['dm.conf', '/etc/dm.conf']
+    config.read(config_files)
 
     # ConfigParsers sets keys which have no value
     # (like `--force` above) to `None`. Thus we
     # need to substitute all `None` with `True`.
-    return dict((key, True if value is None else value)
-                for key, value in config.items('default-arguments'))
+    try:
+        return dict((key, True if value is None else value)
+                    for key, value in config.items('default-arguments'))
+    except Exception as e:
+        print("dm.conf was not found ", e)
+        return {}
 
 
 if __name__ == '__main__':
