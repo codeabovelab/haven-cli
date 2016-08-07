@@ -20,6 +20,7 @@ Commands:
   bind                              Node-cluster binding
   containers                        List of containers by cluster
   container                         Container's operations
+  images                            Images
   job_update                        Run update job
   job_statuses                      List of jobs statuses by cluster
   configuration                     Store configuration to specified file
@@ -73,6 +74,9 @@ def main():
         options = docopt(module.__doc__, argv=args)
         command = command(options)
         command.run()
+    else:
+        print("command not found:" + c)
+        print(__doc__)
 
 
 def load_ini_config():
