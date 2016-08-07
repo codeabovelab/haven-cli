@@ -21,8 +21,7 @@ Commands:
   containers                        List of containers by cluster
   container                         Container's operations
   images                            Images
-  job_update                        Run update job
-  job_statuses                      List of jobs statuses by cluster
+  applications                      Applications management
   configuration                     Store configuration to specified file
   compose                           Run specified compose file
 

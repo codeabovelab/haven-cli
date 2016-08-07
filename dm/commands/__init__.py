@@ -1,5 +1,6 @@
 from .hello import *
 from .container import *
+from .applications import *
 from .containers import *
 from .bind import *
 from .clusters import *
