@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""usage: dm applications [info|rm] --cluster=<cluster> [--application=<application>] [--file=<path>] --server=<server> --port=<port> --login=<login> --password=<password>  [--columns=<column1,column2>] [--help] [--verbose=<level>]
+"""usage: dm applications [list|add|stop|start|rm] --cluster=<cluster> [--application=<application>] [--file=<path>] --server=<server> --port=<port> --login=<login> --password=<password>  [--columns=<column1,column2>] [--help] [--verbose=<level>]
 
 Returns cluster information
 
@@ -18,12 +18,15 @@ Options:
   --columns=<column1,column2>       List of columns [default: name,cluster,initFile,containers]
 
 Commands:
-  info                              Default action: shows container information
-  add                               Add new cluster
-  rm                                Remove cluster
+  info                              Default action: shows application
+  add                               Creates new application using compose file, requires --application=<application> --file=<path>
+  stop                              Removes action, requires --application=<application>
+  rm                                Removes action, requires --application=<application>
 Examples:
   dm applications --cluster=dev
-  dm applications rm --cluster=dev --application=<pythonApp>
+  dm applications add --cluster=dev --application=pythonApp --file=/home/user/compose.yaml
+  dm applications stop --cluster=dev --application=pythonApp
+  dm applications rm --cluster=dev --application=pythonApp
 
 Help:
   You can put any configs to dm.conf file
@@ -40,33 +43,60 @@ class Cluster(Base):
         # /clusters/{cluster}/containers
         add = self.options.get('add')
         rm = self.options.get('rm')
+        stop = self.options.get('stop')
+        start = self.options.get('start')
         if add:
             self.__add()
         if rm:
             self.__rm()
-        if not add and not rm:
-            self.__info()
+        if stop:
+            self.__stop()
+        if start:
+            self.__start()
+        if not add and not rm and not stop and not start:
+            self.__list()
 
-    def __info(self):
+    def __list(self):
         # get /ui/api/application/{cluster}/all
         result = self._send("/ui/api/application/" + self.options.get('--cluster') + "/all")
         columns = self.options.get('--columns')
         keys = columns.split(",")
         self._print(keys, json.loads(result))
 
+    def __stop(self):
+        # post /ui/api/application/{cluster}/{appId}/stop
+        cluster = self.options.get('--cluster')
+        application = self.options.get('--application')
+        if application:
+            self._send("/ui/api/application/" + cluster + "/" + application + "/stop", method='POST')
+        else:
+            print("specify --application=<appId>")
+
+    def __start(self):
+        # post /ui/api/application/{cluster}/{appId}/start
+        cluster = self.options.get('--cluster')
+        application = self.options.get('--application')
+        if application:
+            self._send("/ui/api/application/" + cluster + "/" + application + "/start", method='POST')
+        else:
+            print("specify --application=<appId>")
+
     def __rm(self):
         # delete /ui/api/application/{cluster}/{appId}
-        cluster = self.options.get('--application')
-        if cluster:
-            self._send("/ui/api/application/" + cluster + "/" + self.options.get('--application'))
+        cluster = self.options.get('--cluster')
+        application = self.options.get('--application')
+        if application:
+            self._send("/ui/api/application/" + cluster + "/" + application, method='DELETE')
         else:
-            print("specify --application")
+            print("specify --application=<appId>")
 
     def __add(self):
         # /clusters/{cluster}/compose
         file = self.options.get('--file')
-        if not file:
-            print("specify --file")
+        cluster = self.options.get('--cluster')
+        application = self.options.get('--application')
+        if not file and not application:
+            print("specify --file=<path> --application=<application>")
             return
         try:
             from base64 import b64encode
@@ -75,11 +105,12 @@ class Cluster(Base):
             userAndPass = self.options.get('--login') + ':' + self.options.get('--password')
             bAuth = b64encode(str.encode(userAndPass)).decode("ascii")
             headers = {
-                "Content−type": "application/octet−stream",
+                "Content−type": "multipart/form-data; charset=utf-8'",
                 'Authorization': 'Basic %s' % bAuth
             }
-            # self.conn.request(method, path, data, headers=headers)
-            self.conn.request("POST", "/clusters/" + self.options.get('--cluster') + "/compose", open(file, "rb"), headers)
+            files = {'file': ('compose.yaml', open(file, 'rb'), 'application/json', {'Expires': '0'})}
+            self.conn.request(method='POST', url="/ui/api/application/" + cluster + '/' + application + "/compose",
+                               headers=headers, body=files)
         except Exception as ex:
             self.conn.close()
             self.conn = None
