@@ -105,12 +105,12 @@ class Cluster(Base):
             userAndPass = self.options.get('--login') + ':' + self.options.get('--password')
             bAuth = b64encode(str.encode(userAndPass)).decode("ascii")
             headers = {
-                "Content−type": "multipart/form-data; charset=utf-8'",
-                'Authorization': 'Basic %s' % bAuth
+                "Content-type": "application/octet-stream",
+                "Authorization": "Basic %s" % bAuth
             }
             files = {'file': ('compose.yaml', open(file, 'rb'), 'application/json', {'Expires': '0'})}
             self.conn.request(method='POST', url="/ui/api/application/" + cluster + '/' + application + "/compose",
-                               headers=headers, body=files)
+                               headers=headers, body=open(file, 'rb'))
         except Exception as ex:
             self.conn.close()
             self.conn = None
