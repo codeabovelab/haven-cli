@@ -2,7 +2,7 @@
 
 """usage: dm image [tags|rm] --image=<image> --server=<server> --port=<port> --login=<login> --password=<password>  [--columns=<column1,column2>] [--help] [--verbose=<level>]
 
-Returns cluster information
+Returns image information
 
 Options:
   -h --help                         Show this screen.

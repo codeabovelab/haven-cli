@@ -1,8 +1,7 @@
 #!/usr/bin/python3
+"""usage: dm registries --server=<server> --port=<port> --login=<login> --password=<password> [--columns=<name,host>] [--help] [--verbose=<level>]
 
-"""usage: dm images [list] --server=<server> --port=<port> --login=<login> --password=<password>  [--columns=<column1,column2>] [--help] [--verbose=<level>]
-
-Returns list of images
+Returns list of registries
 
 Options:
   -h --help                         Show this screen.
@@ -12,13 +11,10 @@ Options:
   -p --port=<port>                  port of DM server [default: 8761]
   -u --user=<login>                 Username of DM
   -p --password=<password>          Password of DM
-  -c --cluster=<cluster>            Cluster name
-  --columns=<column1,column2>       List of columns [default: name,registry,clusters,nodes]
+  --columns=<column1,column2>       List of columns [default: name,registryType,disabled,errorMessage]
 
-Commands:
-  list                              List of images
 Examples:
-  dm images
+  dm registries
 
 Help:
   You can put any configs to dm.conf file
@@ -26,18 +22,14 @@ Help:
   https://codeabovelab.com
 """
 
-from .base import Base
 import json
+from .base import Base
 
 
-class Cluster(Base):
+class Nodes(Base):
     def run(self):
-        # /clusters/{cluster}/containers
-        self.__list()
-
-    def __list(self):
-        # http://hb1.codeabovelab.com/ui/api/images/
-        result = self._send("/ui/api/images/")
+        # /ui/api/nodes/
+        result = self._send("/ui/api/registries")
         columns = self.options.get('--columns')
         keys = columns.split(",")
         self._print(keys, json.loads(result))
