@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""usage: dm nodes [--bind=<nodeId:cluster>] --server=<server> --port=<port> --login=<login> --password=<password> [--columns=<name,host>] [--help] [--verbose=<level>]
+"""usage: dm nodes --server=<server> --port=<port> --login=<login> --password=<password> [--columns=<name,host>] [--help] [--verbose=<level>]
 
 Returns list of nodes
 
