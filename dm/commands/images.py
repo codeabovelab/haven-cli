@@ -13,7 +13,7 @@ Options:
   -u --user=<login>                 Username of DM
   -p --password=<password>          Password of DM
   -c --cluster=<cluster>            Cluster name
-  --columns=<column1,column2>       List of columns [default: name,registry,tags,clusters,nodes]
+  --columns=<column1,column2>       List of columns [default: name,registry,clusters,nodes]
 
 Commands:
   list                              List of images

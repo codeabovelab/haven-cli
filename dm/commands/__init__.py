@@ -10,4 +10,5 @@ from .job_statuses import *
 from .job_update import *
 from .configuration import *
 from .images import *
+from .image import *
 
