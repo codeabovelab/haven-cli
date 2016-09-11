@@ -3,6 +3,8 @@
 """The base command."""
 import http.client
 import logging
+import sys
+import json
 
 from ..lib.tabulate import tabulate
 
@@ -77,7 +79,29 @@ class Base(object):
             logging.error("Can not connect to dm %s due to error: %s", self.options.get('--server'), ex)
             raise
         resp = self.conn.getresponse()
-        if resp.status > 300:
-            raise Exception("Invalid response: {} {} from {}"
-                            .format(resp.status, resp.reason, self.options.get('--server')))
-        return resp.read().decode('utf8')
+        if resp.status < 300:
+            return resp.read().decode('utf8')
+        elif resp.status == 401:
+            print("Access denied, check --login --password params, details: [{}] '{}' from '{}'"
+                            .format(resp.status, self.__error(resp), self.options.get('--server')))
+            sys.exit(0)
+        elif resp.status == 404:
+            print("Entry was not found, details: [{}] '{}' from '{}'"
+                            .format(resp.status, self.__error(resp), self.options.get('--server')))
+            sys.exit(0)
+        elif 400 < resp.status < 500:
+            print("client error, see dm --help, details: [{}] '{}' from '{}'"
+                            .format(resp.status, self.__error(resp), self.options.get('--server')))
+            sys.exit(0)
+        elif resp.status > 500:
+            print("Server error, check dockmaster logs, details: [{}] '{}' from '{}'"
+                            .format(resp.status, self.__error(resp), self.options.get('--server')))
+            sys.exit(0)
+
+    @staticmethod
+    def __error(resp):
+        try:
+            return json.loads(resp.read().decode('utf8')).get('message')
+        except:
+            return resp.reason
+
