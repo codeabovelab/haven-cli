@@ -31,7 +31,7 @@ If you've cloned this project, and want to install the library, the command you'
 
     $ pip install -e .
 
-or install from Github
+or install from Github::
 
     $ pip install git+https://github.com/codeabovelab/dockmaster-cli.git
 
