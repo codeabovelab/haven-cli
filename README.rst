@@ -33,7 +33,7 @@ If you've cloned this project, and want to install the library, the command you'
 
 or install from Github
 
-    $ pip install https://github.com/codeabovelab/dockmaster-cli.git
+    $ pip install git+https://github.com/codeabovelab/dockmaster-cli.git
 
 If you'd like to run all tests for this project, you would run the following command::
 
