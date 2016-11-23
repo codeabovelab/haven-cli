@@ -35,10 +35,4 @@ or install from Github::
 
     $ pip install git+https://github.com/codeabovelab/dockmaster-cli.git
 
-If you'd like to run all tests for this project, you would run the following command::
-
-    $ python setup.py test
-
-This will trigger `py.test <http://pytest.org/latest/>`_, along with its popular
-`coverage <https://pypi.python.org/pypi/pytest-cov>`_ plugin.
 
