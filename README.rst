@@ -1,7 +1,7 @@
 dm-cli
 =========
 
-*A Dockmaster command line program in Python.*
+*A Haven command line program in Python.*
 
 License
 -------
@@ -33,6 +33,6 @@ If you've cloned this project, and want to install the library, the command you'
 
 or install from Github::
 
-    $ pip install git+https://github.com/codeabovelab/dockmaster-cli.git
+    $ pip install git+https://github.com/codeabovelab/haven-cli.git
 
 
