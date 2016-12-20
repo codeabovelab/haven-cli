@@ -1,11 +1,12 @@
-dm-cli
+Haven CLI
 =========
+A Haven command line program in Python
 
-*A Haven command line program in Python.*
+Please visit the [Haven](https://github.com/codeabovelab/haven-platform/blob/master/README.md) main project for the complete installation instruction and feature list.
 
 License
 -------
-Copyright 2016 Code Above Lab LLC
+Copyright 2016-2017 Code Above Lab LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -22,12 +23,12 @@ limitations under the License.
 Purpose
 -------
 
-This is a DM CLI application which provids API to DM server
+This is a Haven CLI application which provides the API to communicate to the Haven server.
 
 Usage
 -----
 
-If you've cloned this project, and want to install the library, the command you'll want to run is::
+If you have cloned this project and want to install the library, the command to run is::
 
     $ pip install -e .
 
